@@ -3,3 +3,5 @@ Projeto em PHP criado por [Pedro Sebastião](https://github.com/PHSebastiao) e [
 
 ## Referências
 [CRUD com PHP e MYSQL](https://devcontratado.com/blog/php/crud-php-mysql)
+[CRUD com PHP PDO](https://www.devmedia.com.br/crud-com-php-pdo/28873)
+[DSelect](https://www.npmjs.com/package/@jarstone/dselect)

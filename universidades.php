@@ -42,12 +42,15 @@ require_once './actions/universidades.php';
     <main>
         <div class="container my-5">
             <h1>Gerenciador de Universidades</h1>
+            <div class="d-flex justify-content-end">
+                <a class="btn btn-success mb-3" href="./universidadesCriar.php">Criar Universidade</a>
+            </div>
             <table id="tabela" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Nome</th>
-                        <th scope="col">Codigo</th>
+                        <th scope="col">Código</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>

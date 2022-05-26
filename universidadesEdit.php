@@ -85,7 +85,6 @@ $universidade = $sql->fetch();
                         <label for="Endereco" class="form-label">Endereço</label>
                         <select class="form-select" id="Endereco" name="endereco">
                             <?php
-                            //$universidade['fk_IdEndereco'];
                             $sql = $pdo->query("SELECT IdEndereco, concat(Rua, ', ', Numero, ' - ', Cidade, ', ', Estado) AS EnderecoText FROM endereco;");
 
 

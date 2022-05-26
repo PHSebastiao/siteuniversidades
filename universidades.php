@@ -1,8 +1,5 @@
 <?php
 require_once './config.php';
-require_once './actions/universidades.php';
-
-// $universidade = getUniversidade($conn, $_GET['id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +16,27 @@ require_once './actions/universidades.php';
 </head>
 
 <body>
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Deletar Universidade</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="universidadesDelete.php" method="POST">
+                    <div class="modal-body">
+                        <input type="hidden" name="delete_id" id="delete_id">
+                        Realmente deseja deletar a universidade?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-danger">Sim</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
@@ -63,12 +81,12 @@ require_once './actions/universidades.php';
                     while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                         <tr>
-                            <th scope="row"><?= $linha['IdUniversidade'] ?></th>
+                            <td><?= $linha['IdUniversidade'] ?></td>
                             <td><?= $linha['Nome'] ?></td>
                             <td><?= $linha['Codigo'] ?></td>
                             <td>
                                 <a class="btn btn-sm btn-info" href="./universidadesEdit.php?id=<?= $linha['IdUniversidade'] ?>"><i class="bi bi-pencil"></i></a>
-                                <a class="btn btn-sm btn-danger" href="./universidadesEdit.php?id=<?= $linha['IdUniversidade'] ?>"><i class="bi bi-trash3"></i></a>
+                                <a class="btn btn-sm btn-danger deleteBtn"><i class="bi bi-trash3"></i></a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -85,6 +103,16 @@ require_once './actions/universidades.php';
 <script>
     $(document).ready(function() {
         $('#tabela').DataTable();
+    });
+
+    $('.deleteBtn').on("click", function() {
+        $('#deleteModal').modal('show'); // exibir modal ao clicar botao
+        $tr = $(this).closest('tr'); // pegar qual linha o botão está
+        var data = $tr.children("td").map(function() { // pegar dados da linha
+            return $(this).text(); 
+        }).get();
+        console.log(data); // debug: confirmar se os dados estão corretos
+        $('#delete_id').val(data[0]); // alterar id que sera levado ao delete
     });
 </script>
 

@@ -5,27 +5,25 @@ $id;
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 } else {
-    header("Location: ./universidades.php");
+    header("Location: ./professor.php");
 }
-if (isset($_POST["nome"]) && isset($_POST["codigo"]) && isset($_POST["sigla"]) && isset($_POST["endereco"])) {
+if (isset($_POST["RA"]) && isset($_POST["idPessoa"])) {
     try {
-        $stmt = $pdo->prepare('UPDATE Universidade SET nome = :nome, codigo = :codigo, sigla = :sigla, fk_idendereco = :endereco WHERE IdUniversidade = :id');
+        $stmt = $pdo->prepare('UPDATE Professor SET RA = :RA, fk_idPessoa = :idPessoa WHERE IdProfessor = :id');
         $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':nome', $_POST["nome"]);
-        $stmt->bindParam(':codigo', $_POST["codigo"]);
-        $stmt->bindParam(':sigla', $_POST["sigla"]);
-        $stmt->bindParam(':endereco', $_POST["endereco"]);
+        $stmt->bindParam(':RA', $_POST["RA"]);
+        $stmt->bindParam(':idPessoa', $_POST["idPessoa"]);
         $stmt->execute();
-        header("Location: ./universidades.php");
+        header("Location: ./professor.php");
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
 }
 
-$sql = $pdo->prepare('SELECT * FROM Universidade AS u LEFT JOIN Endereco as e ON u.fk_IdEndereco = e.IdEndereco WHERE IdUniversidade = :id LIMIT 1;');
+$sql = $pdo->prepare("SELECT professor.IdProfessor, RA, IdPessoa, concat(PrimeiroNome ,' ' , Sobrenome) AS NomeCompleto FROM professor INNER JOIN pessoa ON professor.fk_idPessoa = pessoa.idPessoa WHERE IdProfessor = :id;");
 $sql->bindParam(':id', $id);
 $sql->execute();
-$universidade = $sql->fetch();
+$professor = $sql->fetch();
 
 
 ?>
@@ -48,31 +46,22 @@ $universidade = $sql->fetch();
     <?php require_once 'header.php' ?>
     <main>
         <div class="container">
-            <h1>Gerenciador de Universidades</h1>
+            <h1>Editar Professor</h1>
             <div class="row">
-                <form action="./universidadesEdit.php?id=<?= $id ?>" method="POST">
+                <form action="./professorEdit.php?id=<?= $id ?>" method="POST">
                     <div class="mb-3 col-6">
-                        <label for="Nome" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="Nome" name="nome" value="<?= $universidade['Nome'] ?>" aria-describedby="nome">
+                        <label for="RA" class="form-label">RA</label>
+                        <input type="text" class="form-control" id="RA" name="RA" value="<?= $professor['RA'] ?>" aria-describedby="RA">
                     </div>
                     <div class="mb-3 col-6">
-                        <label for="Codigo" class="form-label">Código</label>
-                        <input type="text" class="form-control" id="Codigo" name="codigo" value="<?= $universidade['Codigo'] ?>" aria-describedby="código">
-                    </div>
-                    <div class="mb-3 col-6">
-                        <label for="Sigla" class="form-label">Sigla</label>
-                        <input type="text" class="form-control" id="Sigla" name="sigla" value="<?= $universidade['Sigla'] ?>" aria-describedby="sigla">
-                    </div>
-                    <div class="mb-3 col-6">
-                        <label for="Endereco" class="form-label">Endereço</label>
-                        <select class="form-select" id="Endereco" name="endereco">
+                        <label for="Pessoa" class="form-label">Pessoa</label>
+                        <select class="form-select" id="Pessoa" name="idPessoa">
                             <?php
-                            $sql = $pdo->query("SELECT IdEndereco, concat(Rua, ', ', Numero, ' - ', Cidade, ', ', Estado) AS EnderecoText FROM endereco;");
-
+                            $sql = $pdo->query("SELECT concat(PrimeiroNome ,' ' , Sobrenome) AS NomeCompleto, idPessoa FROM  Pessoa;");
 
                             while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
                             ?>
-                                <option value="<?= $linha['IdEndereco'] ?>" <?php if ($linha['IdEndereco'] == $universidade['IdEndereco']) echo 'selected' ?>><?= $linha['EnderecoText'] ?></option>
+                                <option value="<?= $linha['idPessoa'] ?>" <?php if ($linha['idPessoa'] == $professor['IdPessoa']) echo 'selected' ?>><?= $linha['NomeCompleto'] ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -88,7 +77,7 @@ $universidade = $sql->fetch();
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="assets\dselect.js"></script>
 <script>
-    dselect(document.querySelector('#Endereco'), {
+    dselect(document.querySelector('#Pessoa'), {
         search: true
     });
 </script>

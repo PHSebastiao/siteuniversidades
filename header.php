@@ -16,6 +16,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./enderecos.php">Endereços</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./professor.php">Professores</a>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -3,7 +3,7 @@ require_once './config.php';
 require_once './actions/universidades.php';
 
 $id;
-if(isset($_GET['id'])){
+if (isset($_GET['id'])) {
     $id = $_GET['id'];
 } else {
     header("Location: ./universidades.php");
@@ -44,31 +44,14 @@ $universidade = $sql->fetch();
     <link rel="stylesheet" href="./assets/style.css">
     <title>Site Universidades</title>
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Site Universidades</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="./">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="./universidades.php">Universidades</a>
-                        </li>
-                    </ul>
-                </div>
-        </nav>
-    </header>
+    <?php require_once 'header.php' ?>
     <main>
         <div class="container">
             <h1>Gerenciador de Universidades</h1>
             <div class="row">
-                <form action="./universidadesEdit.php?id=<?=$id?>" method="POST">
+                <form action="./universidadesEdit.php?id=<?= $id ?>" method="POST">
                     <div class="mb-3 col-6">
                         <label for="Nome" class="form-label">Nome</label>
                         <input type="text" class="form-control" id="Nome" name="nome" value="<?= $universidade['Nome'] ?>" aria-describedby="nome">
@@ -95,6 +78,7 @@ $universidade = $sql->fetch();
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Editar</button>
+                    <button class="btn btn-secondary" href="window.history.go(-1)">Voltar</button>
                 </form>
             </div>
         </div>

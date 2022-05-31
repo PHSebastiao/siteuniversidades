@@ -32,26 +32,9 @@ if (isset($_POST["nome"]) && isset($_POST["codigo"]) && isset($_POST["sigla"]) &
     <link rel="stylesheet" href="./assets/style.css">
     <title>Site Universidades</title>
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Site Universidades</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="./">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="./universidades.php">Universidades</a>
-                        </li>
-                    </ul>
-                </div>
-        </nav>
-    </header>
+    <?php require_once 'header.php' ?>
     <main>
         <div class="container">
             <h1>Gerenciador de Universidades</h1>
@@ -63,11 +46,11 @@ if (isset($_POST["nome"]) && isset($_POST["codigo"]) && isset($_POST["sigla"]) &
                     </div>
                     <div class="mb-3 col-6">
                         <label for="Codigo" class="form-label">Código</label>
-                        <input type="text" class="form-control" id="Codigo" name="codigo"  aria-describedby="código">
+                        <input type="text" class="form-control" id="Codigo" name="codigo" aria-describedby="código">
                     </div>
                     <div class="mb-3 col-6">
                         <label for="Sigla" class="form-label">Sigla</label>
-                        <input type="text" class="form-control" id="Sigla" name="sigla"  aria-describedby="sigla">
+                        <input type="text" class="form-control" id="Sigla" name="sigla" aria-describedby="sigla">
                     </div>
                     <div class="mb-3 col-6">
                         <label for="Endereco" class="form-label">Endereço</label>

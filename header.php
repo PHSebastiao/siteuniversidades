@@ -31,6 +31,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./periodo.php">Periodo</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./disciplina.php">Disciplina</a>
+                    </li>
                 </ul>
             </div>
         </div>

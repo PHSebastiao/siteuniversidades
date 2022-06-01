@@ -28,6 +28,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./aluno.php">Aluno</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./periodo.php">Periodo</a>
+                    </li>
                 </ul>
             </div>
         </div>

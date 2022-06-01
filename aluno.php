@@ -21,13 +21,13 @@ require_once './config.php';
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Deletar Pessoa</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Deletar Aluno</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="pessoaDelete.php" method="POST">
+                <form action="alunoDelete.php" method="POST">
                     <div class="modal-body">
                         <input type="hidden" name="delete_id" id="delete_id">
-                        Realmente deseja deletar esta pessoa?
+                        Realmente deseja deletar este aluno?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -40,38 +40,36 @@ require_once './config.php';
     <?php require_once 'header.php' ?>
     <main>
         <div class="container my-5">
-            <h1>Gerenciador de Pessoas</h1>
+            <h1>Gerenciador de Alunos</h1>
             <div class="d-flex justify-content-end">
-                <a class="btn btn-success mb-3" href="./pessoaCriar.php">Criar Pessoa</a>
+                <a class="btn btn-success mb-3" href="./alunoCriar.php">Criar Aluno</a>
             </div>
             <table id="tabela" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
-                        <th scope="col">Id Pessoa</th>
-                        <th scope="col">CPF</th>
-                        <th scope="col">Nome Completo</th>
-                        <th scope="col">Data de Nascimento</th>
+                        <th scope="col">Id Aluno</th>
+                        <th scope="col">RA</th>
+                        <th scope="col">Nome</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
 
-                    $sql = $pdo->query("SELECT  concat(PrimeiroNome ,' ' , Sobrenome) AS NomeCompleto, IdPessoa AS id, CPF, DTN FROM Pessoa;");
+                    $sql = $pdo->query("SELECT aluno.IdAluno, RA, concat(PrimeiroNome ,' ' , Sobrenome) AS NomeCompleto FROM Aluno INNER JOIN Pessoa ON Aluno.fk_idPessoa = pessoa.idPessoa;");
 
 
                     while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
-                    ?>
-                        <tr>
-                            <td><?= $linha['id'] ?></td>
-                            <td><?= $linha['CPF'] ?></td>
-                            <td><?= $linha['NomeCompleto'] ?></td>
-                            <td><?= $linha['DTN'] ?></td>
-                            <td>
-                                <a class="btn btn-sm btn-info" href="./pessoaEdit.php?id=<?= $linha['id'] ?>"><i class="bi bi-pencil"></i></a>
-                                <a class="btn btn-sm btn-danger deleteBtn"><i class="bi bi-trash3"></i></a>
-                            </td>
-                        </tr>
-                    <?php } ?>
+                        ?>
+                            <tr>
+                                <td><?= $linha['IdAluno'] ?></td>
+                                <td><?= $linha['RA'] ?></td>
+                                <td><?= $linha['NomeCompleto'] ?></td>
+                                <td>
+                                    <a class="btn btn-sm btn-info" href="./alunoEdit.php?id=<?= $linha['IdAluno'] ?>"><i class="bi bi-pencil"></i></a>
+                                    <a class="btn btn-sm btn-danger deleteBtn"><i class="bi bi-trash3"></i></a>
+                                </td>
+                            </tr>
+                        <?php } ?>
             </table>
         </div>
     </main>

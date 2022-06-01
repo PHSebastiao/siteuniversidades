@@ -1,18 +1,20 @@
 <?php
 require_once './config.php';
 
-if (isset($_POST["RA"]) && isset($_POST["idPessoa"])) {
+if (isset($_POST["CPF"]) && isset($_POST["PrimeiroNome"]) && isset($_POST["Sobrenome"]) && isset($_POST["DTN"])) {
     try {
-        $stmt = $pdo->prepare('INSERT INTO Professor (RA, fk_idPessoa) VALUES (:RA, :idPessoa)');
-        $stmt->bindParam(':RA', $_POST["RA"]);
-        $stmt->bindParam(':idPessoa', $_POST["idPessoa"]);
+        $stmt = $pdo->prepare("INSERT INTO Pessoa(CPF, PrimeiroNome, Sobrenome, DTN) VALUES (:CPF, :PrimeiroNome, :Sobrenome, :DTN);");
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':CPF', $_POST["CPF"]);
+        $stmt->bindParam(':PrimeiroNome', $_POST["PrimeiroNome"]);
+        $stmt->bindParam(':Sobrenome', $_POST["Sobrenome"]);
+        $stmt->bindParam(':DTN', $_POST["DTN"]);
         $stmt->execute();
-        header("Location: ./professor.php");
+        header("Location: ./pessoa.php");
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
 }
-
 
 ?>
 <!DOCTYPE html>
@@ -34,24 +36,24 @@ if (isset($_POST["RA"]) && isset($_POST["idPessoa"])) {
     <?php require_once 'header.php' ?>
     <main>
         <div class="container">
-            <h1>Criar Professor</h1>
+            <h1>Criar Pessoa</h1>
             <div class="row">
-                <form action="./professorCriar.php" method="POST">
+                <form action="./pessoaCriar.php" method="POST">
                     <div class="mb-3 col-6">
-                        <label for="RA" class="form-label">RA</label>
-                        <input type="text" class="form-control" id="RA" name="RA" aria-describedby="RA">
+                        <label for="CPF" class="form-label">CPF</label>
+                        <input type="text" class="form-control" id="CPF" name="CPF" aria-describedby="CPF">
                     </div>
                     <div class="mb-3 col-6">
-                        <label for="Pessoa" class="form-label">Pessoa</label>
-                        <select class="form-select" id="Pessoa" name="idPessoa">
-                            <?php
-                            $sql = $pdo->query("SELECT concat(PrimeiroNome ,' ' , Sobrenome) AS NomeCompleto, idPessoa FROM  Pessoa;");
-
-                            while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
-                            ?>
-                                <option value="<?= $linha['idPessoa'] ?>"><?= $linha['NomeCompleto'] ?></option>
-                            <?php } ?>
-                        </select>
+                        <label for="PrimeiroNome" class="form-label">Primeiro Nome</label>
+                        <input type="text" class="form-control" id="PrimeiroNome" name="PrimeiroNome" aria-describedby="PrimeiroNome">
+                    </div>
+                    <div class="mb-3 col-6">
+                        <label for="Sobrenome" class="form-label">Sobrenome</label>
+                        <input type="text" class="form-control" id="Sobrenome" name="Sobrenome" aria-describedby="Sobrenome">
+                    </div>
+                    <div class="mb-3 col-6">
+                        <label for="DTN" class="form-label">Data de Nascimento</label>
+                        <input type="text" class="form-control" id="DTN" name="DTN" aria-describedby="DTN">
                     </div>
                     <button type="submit" class="btn btn-success">Criar</button>
                     <button type="button" class="btn btn-secondary voltar">Voltar</button>
@@ -63,12 +65,6 @@ if (isset($_POST["RA"]) && isset($_POST["idPessoa"])) {
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="assets\dselect.js"></script>
-<script>
-    dselect(document.querySelector('#Pessoa'), {
-        search: true
-    });
-</script>
 <script src="./assets/main.js"></script>
 
 </html>

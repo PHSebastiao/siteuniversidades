@@ -74,7 +74,7 @@ $endereco = $sql->fetch();
                         <input type="text" class="form-control" name="cidade" value="<?= $endereco['Cidade'] ?>" id="Cidade">
                     </div>
                     <button type="submit" class="btn btn-primary">Editar</button>
-                    <button class="btn btn-secondary" href="window.history.go(-1)">Voltar</button>
+                    <button class="btn btn-secondary voltar" >Voltar</button>
                 </form>
             </div>
         </div>

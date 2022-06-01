@@ -19,6 +19,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./professor.php">Professores</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./cursos.php">Cursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./pessoa.php">Pessoa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./aluno.php">Aluno</a>
+                    </li>
                 </ul>
             </div>
         </div>

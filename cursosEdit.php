@@ -1,17 +1,30 @@
 <?php
 require_once './config.php';
 
-if (isset($_POST["RA"]) && isset($_POST["idPessoa"])) {
+$id;
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+} else {
+    header("Location: ./cursos.php");
+}
+
+if (isset($_POST["nome"]) && isset($_POST["codigo"])) {
     try {
-        $stmt = $pdo->prepare('INSERT INTO Professor (RA, fk_idPessoa) VALUES (:RA, :idPessoa)');
-        $stmt->bindParam(':RA', $_POST["RA"]);
-        $stmt->bindParam(':idPessoa', $_POST["idPessoa"]);
+        $stmt = $pdo->prepare('UPDATE Curso SET nome = :nome, codigo = :codigo WHERE IdCurso = :id');
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':nome', $_POST["nome"]);
+        $stmt->bindParam(':codigo', $_POST["codigo"]);
         $stmt->execute();
-        header("Location: ./professor.php");
+        header("Location: ./cursos.php");
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
 }
+
+$sql = $pdo->prepare('SELECT * FROM Curso WHERE IdCurso = :id LIMIT 1;');
+$sql->bindParam(':id', $id);
+$sql->execute();
+$cursos = $sql->fetch();
 
 
 ?>
@@ -34,26 +47,18 @@ if (isset($_POST["RA"]) && isset($_POST["idPessoa"])) {
     <?php require_once 'header.php' ?>
     <main>
         <div class="container">
-            <h1>Criar Professor</h1>
+            <h1>Editar Cursos</h1>
             <div class="row">
-                <form action="./professorCriar.php" method="POST">
+                <form action="./cursosEdit.php?id=<?= $id ?>" method="POST">
                     <div class="mb-3 col-6">
-                        <label for="RA" class="form-label">RA</label>
-                        <input type="text" class="form-control" id="RA" name="RA" aria-describedby="RA">
+                        <label for="Nome" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="Nome" value="<?= $cursos['Nome'] ?>" name="nome" aria-describedby="Nome">
                     </div>
                     <div class="mb-3 col-6">
-                        <label for="Pessoa" class="form-label">Pessoa</label>
-                        <select class="form-select" id="Pessoa" name="idPessoa">
-                            <?php
-                            $sql = $pdo->query("SELECT concat(PrimeiroNome ,' ' , Sobrenome) AS NomeCompleto, idPessoa FROM  Pessoa;");
-
-                            while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
-                            ?>
-                                <option value="<?= $linha['idPessoa'] ?>"><?= $linha['NomeCompleto'] ?></option>
-                            <?php } ?>
-                        </select>
+                        <label for="Código" class="form-label">Código</label>
+                        <input type="text" class="form-control" id="Código" value="<?= $cursos['Codigo'] ?>" name="codigo" aria-describedby="Código">
                     </div>
-                    <button type="submit" class="btn btn-success">Criar</button>
+                    <button type="submit" class="btn btn-primary">Editar</button>
                     <button type="button" class="btn btn-secondary voltar">Voltar</button>
                 </form>
             </div>
@@ -64,11 +69,6 @@ if (isset($_POST["RA"]) && isset($_POST["idPessoa"])) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="assets\dselect.js"></script>
-<script>
-    dselect(document.querySelector('#Pessoa'), {
-        search: true
-    });
-</script>
 <script src="./assets/main.js"></script>
 
 </html>

@@ -50,6 +50,7 @@ require_once './config.php';
                         <th scope="col">Id Curso</th>
                         <th scope="col">Nome</th>
                         <th scope="col">Codigo</th>
+                        <th scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>

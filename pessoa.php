@@ -51,6 +51,7 @@ require_once './config.php';
                         <th scope="col">CPF</th>
                         <th scope="col">Nome Completo</th>
                         <th scope="col">Data de Nascimento</th>
+                        <th scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,6 +73,7 @@ require_once './config.php';
                             </td>
                         </tr>
                     <?php } ?>
+                </tbody>
             </table>
         </div>
     </main>

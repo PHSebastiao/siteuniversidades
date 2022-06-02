@@ -57,11 +57,11 @@ $aluno = $sql->fetch();
                         <label for="Pessoa" class="form-label">Pessoa</label>
                         <select class="form-select" id="Pessoa" name="idAluno">
                             <?php
-                            $sql = $pdo->query("SELECT concat(PrimeiroNome ,' ' , Sobrenome) AS NomeCompleto, idPessoa FROM  aluno;");
+                            $sql = $pdo->query("SELECT concat(PrimeiroNome ,' ' , Sobrenome) AS NomeCompleto, idPessoa FROM  pessoa;");
 
                             while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
                             ?>
-                                <option value="<?= $linha['idPessoa'] ?>" <?php if ($linha['idPessoa'] == $aluno['IdPessoa']) echo 'selected' ?>><?= $linha['NomeCompleto'] ?></option>
+                                <option value="<?= $linha['idPessoa'] ?>" <?php if ($linha['idPessoa'] == $aluno['idPessoa']) echo 'selected' ?>><?= $linha['NomeCompleto'] ?></option>
                             <?php } ?>
                         </select>
                     </div>

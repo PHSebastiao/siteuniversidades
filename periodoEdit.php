@@ -53,15 +53,15 @@ $periodoletivo = $sql->fetch();
                 <form action="./periodoEdit.php?id=<?= $id ?>" method="POST">
                     <div class="mb-3 col-6">
                         <label for="codigo" class="form-label">Código</label>
-                        <input type="text" class="form-control" id="codigo" value="<?= $periodoletivo['codigo'] ?>" name="codigo" aria-describedby="codigo">
+                        <input type="text" class="form-control" id="codigo" value="<?= $periodoletivo['Codigo'] ?>" name="codigo" aria-describedby="codigo">
                     </div>
                     <div class="mb-3 col-6">
                         <label for="dataInicio" class="form-label">Data de Início</label>
-                        <input type="text" class="form-control" id= "dataInicio" value="<?= $periodoletivo['dataInicio'] ?>" name="dataInicio" aria-describedby="dataInicio">
+                        <input type="date" class="form-control" id= "dataInicio" value="<?= $periodoletivo['DataInicio'] ?>" name="dataInicio" aria-describedby="dataInicio">
                     </div>
                     <div class="mb-3 col-6">
                         <label for="dataFim" class="form-label">Data Final</label>
-                        <input type="text" class="form-control" id="dataFim" value="<?= $periodoletivo['dataFim'] ?>" name="dataFim" aria-describedby="dataFim">
+                        <input type="date" class="form-control" id="dataFim" value="<?= $periodoletivo['DataFim'] ?>" name="dataFim" aria-describedby="dataFim">
                     </div>
                     <button type="submit" class="btn btn-primary">Editar</button>
                     <button type="button" class="btn btn-secondary voltar">Voltar</button>

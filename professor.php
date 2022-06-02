@@ -50,7 +50,7 @@ require_once './config.php';
                         <th scope="col">Id</th>
                         <th scope="col">RA</th>
                         <th scope="col">Nome</th>
-
+                        <th scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -77,10 +77,7 @@ require_once './config.php';
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script
-  src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-  crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
 <script src="./assets/main.js"></script>
 
@@ -93,7 +90,7 @@ require_once './config.php';
         $('#deleteModal').modal('show'); // exibir modal ao clicar botao
         $tr = $(this).closest('tr'); // pegar qual linha o botão está
         var data = $tr.children("td").map(function() { // pegar dados da linha
-            return $(this).text(); 
+            return $(this).text();
         }).get();
         console.log(data); // debug: confirmar se os dados estão corretos
         $('#delete_id').val(data[0]); // alterar id que sera levado ao delete

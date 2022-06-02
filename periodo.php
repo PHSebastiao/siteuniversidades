@@ -51,6 +51,7 @@ require_once './config.php';
                         <th scope="col">Codigo</th>
                         <th scope="col">Data de Inicio</th>
                         <th scope="col">Data de Término</th>
+                        <th scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>

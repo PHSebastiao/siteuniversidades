@@ -34,7 +34,7 @@ if (isset($_POST["codigo"]) && isset($_POST["dataInicio"]) && isset($_POST["data
 <body>
     <?php require_once 'header.php' ?>
     <main>
-        <div class="container">
+        <div class="container mt-5">
             <h1>Gerenciador de Periodos Letivos</h1>
             <div class="row">
                 <form action="./periodoCriar.php" method="POST">
@@ -44,11 +44,11 @@ if (isset($_POST["codigo"]) && isset($_POST["dataInicio"]) && isset($_POST["data
                     </div>
                     <div class="mb-3 col-6">
                         <label for="dataInicio" class="form-label">Data de Início</label>
-                        <input type="text" class="form-control" id="dataInicio" name="dataInicio" aria-describedby="dataInicio">
+                        <input type="date" class="form-control" id="dataInicio" name="dataInicio" aria-describedby="dataInicio">
                     </div>
                     <div class="mb-3 col-6">
                         <label for="dataFim" class="form-label">Data Final</label>
-                        <input type="text" class="form-control" id="dataFim" name="dataFim" aria-describedby="dataInicio">
+                        <input type="date" class="form-control" id="dataFim" name="dataFim" aria-describedby="dataInicio">
                     </div>
                     <button type="submit" class="btn btn-success">Criar</button>
                     <button type="button" class="btn btn-secondary voltar">Voltar</button>

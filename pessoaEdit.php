@@ -65,7 +65,7 @@ $Pessoa = $sql->fetch();
                     </div>
                     <div class="mb-3 col-6">
                         <label for="DTN" class="form-label">Data de Nascimento</label>
-                        <input type="text" class="form-control" id="DTN" name="DTN" value="<?= $Pessoa['DTN'] ?>" aria-describedby="DTN">
+                        <input type="date" class="form-control" id="DTN" name="DTN" value="<?= $Pessoa['DTN'] ?>" aria-describedby="DTN">
                     </div>
                     <button type="submit" class="btn btn-primary">Editar</button>
                     <button type="button" class="btn btn-secondary voltar">Voltar</button>

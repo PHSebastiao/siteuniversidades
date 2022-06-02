@@ -33,7 +33,7 @@ if (isset($_POST["RA"]) && isset($_POST["idPessoa"])) {
 <body>
     <?php require_once 'header.php' ?>
     <main>
-        <div class="container">
+        <div class="container  mt-5">
             <h1>Criar Aluno</h1>
             <div class="row">
                 <form action="./alunoCriar.php" method="POST">

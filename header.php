@@ -7,37 +7,42 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav d-flex mb-2 mb-lg-0">
-                    
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="./">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./universidades.php">Universidades</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./enderecos.php">Endereços</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./pessoa.php">Pessoa</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./professor.php">Professores</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./aluno.php">Aluno</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./cursos.php">Cursos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./periodo.php">Periodo</a>
-                        </li>
-                    
+
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Gerência</a>
+                        <a class="nav-link active" aria-current="page" href="./">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./universidades.php">Universidades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./enderecos.php">Endereços</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./pessoa.php">Pessoa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./professor.php">Professores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./aluno.php">Aluno</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./cursos.php">Cursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./periodo.php">Período</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./disciplina.php">Disciplina</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./matriculas.php">Matrícula</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./profcad.php">Cadastro Prof</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Gerência</a>
                     </li>
                 </ul>
             </div>

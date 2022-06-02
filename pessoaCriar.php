@@ -4,7 +4,6 @@ require_once './config.php';
 if (isset($_POST["CPF"]) && isset($_POST["PrimeiroNome"]) && isset($_POST["Sobrenome"]) && isset($_POST["DTN"])) {
     try {
         $stmt = $pdo->prepare("INSERT INTO Pessoa(CPF, PrimeiroNome, Sobrenome, DTN) VALUES (:CPF, :PrimeiroNome, :Sobrenome, :DTN);");
-        $stmt->bindParam(':id', $id);
         $stmt->bindParam(':CPF', $_POST["CPF"]);
         $stmt->bindParam(':PrimeiroNome', $_POST["PrimeiroNome"]);
         $stmt->bindParam(':Sobrenome', $_POST["Sobrenome"]);
@@ -53,9 +52,9 @@ if (isset($_POST["CPF"]) && isset($_POST["PrimeiroNome"]) && isset($_POST["Sobre
                     </div>
                     <div class="mb-3 col-6">
                         <label for="DTN" class="form-label">Data de Nascimento</label>
-                        <input type="text" class="form-control" id="DTN" name="DTN" aria-describedby="DTN">
+                        <input type="date" class="form-control" id="DTN" name="DTN" aria-describedby="DTN">
                     </div>
-                    <button type="submit" class="btn btn-success">Criar</button>
+                    <button type="submit" class="btn btn-success">Criar</button>"yyyy-mm-dd"
                     <button type="button" class="btn btn-secondary voltar">Voltar</button>
                 </form>
             </div>

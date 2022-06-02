@@ -35,7 +35,7 @@ if (isset($_POST["nome"]) && isset($_POST["codigo"]) && isset($_POST["precoBase"
 <body>
     <?php require_once 'header.php' ?>
     <main>
-        <div class="container">
+        <div class="container mt-5">
             <h1>Gerenciador de Disciplinas</h1>
             <div class="row">
                 <form action="./disciplinaCriar.php" method="POST">
@@ -48,16 +48,12 @@ if (isset($_POST["nome"]) && isset($_POST["codigo"]) && isset($_POST["precoBase"
                         <input type="text" class="form-control" id="Código" name="codigo" aria-describedby="Código">
                     </div>
                     <div class="mb-3 col-6">
-                        <label for="Código" class="form-label">Código</label>
-                        <input type="text" class="form-control" id="Código" name="codigo" aria-describedby="Código">
-                    </div>
-                    <div class="mb-3 col-6">
                         <label for="precoBase" class="form-label">Preço Base</label>
-                        <input type="text" class="form-control" id="precoBase" name="precoBase" aria-describedby="precoBase">
+                        <input type="number" class="form-control" step="0.01" id="precoBase" name="precoBase" aria-describedby="precoBase">
                     </div>
                     <div class="mb-3 col-6">
                         <label for="creditos" class="form-label">Créditos</label>
-                        <input type="text" class="form-control" id="creditos" name="creditos" aria-describedby="creditos">
+                        <input type="number" class="form-control" id="creditos" name="creditos" aria-describedby="creditos">
                     </div>
                     <button type="submit" class="btn btn-success">Criar</button>
                     <button type="button" class="btn btn-secondary voltar">Voltar</button>

@@ -47,7 +47,7 @@ $periodoletivo = $sql->fetch();
 <body>
     <?php require_once 'header.php' ?>
     <main>
-        <div class="container">
+        <div class="container mt-5">
             <h1>Editar Período</h1>
             <div class="row">
                 <form action="./periodoEdit.php?id=<?= $id ?>" method="POST">

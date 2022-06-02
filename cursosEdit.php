@@ -46,7 +46,7 @@ $cursos = $sql->fetch();
 <body>
     <?php require_once 'header.php' ?>
     <main>
-        <div class="container">
+        <div class="container  mt-5">
             <h1>Editar Cursos</h1>
             <div class="row">
                 <form action="./cursosEdit.php?id=<?= $id ?>" method="POST">

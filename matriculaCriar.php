@@ -1,29 +1,17 @@
 <?php
 require_once './config.php';
 
-$id;
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-} else {
-    header("Location: ./aluno.php");
-}
-if (isset($_POST["RA"]) && isset($_POST["idPessoa"])) {
+if (isset($_POST["aluno"]) && isset($_POST["disciplina"])) {
     try {
-        $stmt = $pdo->prepare('UPDATE Aluno SET RA = :RA, fk_idAluno = :idPessoa WHERE IdAluno = :id');
-        $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':RA', $_POST["RA"]);
-        $stmt->bindParam(':idPessoa', $_POST["idPessoa"]);
+        $stmt = $pdo->prepare('INSERT INTO AlunoDisciplina (fk_IdAluno, fk_IdDisciplina) VALUES (:aluno, :disciplina)');
+        $stmt->bindParam(':disciplina', $_POST["disciplina"]);
+        $stmt->bindParam(':aluno', $_POST["aluno"]);
         $stmt->execute();
-        header("Location: ./aluno.php");
+        header("Location: ./profcad.php");
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
 }
-
-$sql = $pdo->prepare("SELECT aluno.IdAluno, RA, idPessoa, concat(PrimeiroNome ,' ' , Sobrenome) AS NomeCompleto FROM aluno INNER JOIN pessoa ON aluno.fk_idPessoa = pessoa.idPessoa WHERE IdAluno= :id;");
-$sql->bindParam(':id', $id);
-$sql->execute();
-$aluno = $sql->fetch();
 
 
 ?>
@@ -45,27 +33,35 @@ $aluno = $sql->fetch();
 <body>
     <?php require_once 'header.php' ?>
     <main>
-        <div class="container  mt-5">
-            <h1>Editar Aluno</h1>
+        <div class="container mt-5">
+            <h1>Criar Matrícula</h1>
             <div class="row">
-                <form action="./alunoEdit.php?id=<?= $id ?>" method="POST">
+                <form action="./matriculaCriar.php" method="POST">
                     <div class="mb-3 col-6">
-                        <label for="RA" class="form-label">RA</label>
-                        <input type="text" class="form-control" id="RA" name="RA" value="<?= $aluno['RA'] ?>" aria-describedby="RA">
-                    </div>
-                    <div class="mb-3 col-6">
-                        <label for="Pessoa" class="form-label">Pessoa</label>
-                        <select class="form-select" id="Pessoa" name="idAluno">
+                        <label for="Aluno" class="form-label">Aluno</label>
+                        <select class="form-select" id="Aluno" name="aluno">
                             <?php
-                            $sql = $pdo->query("SELECT concat(PrimeiroNome ,' ' , Sobrenome) AS NomeCompleto, idPessoa FROM  pessoa;");
+                            $sql = $pdo->query("SELECT a.IdAluno, concat(p.PrimeiroNome ,' ' , p.Sobrenome) as Nome FROM  Aluno as a INNER JOIN Pessoa as p ON a.fk_IdPessoa = p.IdPessoa;");
 
                             while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
                             ?>
-                                <option value="<?= $linha['idPessoa'] ?>" <?php if ($linha['idPessoa'] == $aluno['idPessoa']) echo 'selected' ?>><?= $linha['NomeCompleto'] ?></option>
+                                <option value="<?= $linha['IdAluno'] ?>"><?= $linha['Nome'] ?></option>
                             <?php } ?>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Editar</button>
+                    <div class="mb-3 col-6">
+                        <label for="Disciplina" class="form-label">Disciplina</label>
+                        <select class="form-select" id="Disciplina" name="disciplina" value="<?= $alunoDisciplina['fk_IdDisciplina'] ?>">
+                            <?php
+                            $sql = $pdo->query("SELECT Nome, IdDisciplina FROM  Disciplina;");
+
+                            while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
+                            ?>
+                                <option value="<?= $linha['IdDisciplina'] ?>"><?= $linha['Nome'] ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Criar</button>
                     <button type="button" class="btn btn-secondary voltar">Voltar</button>
                 </form>
             </div>
@@ -77,10 +73,13 @@ $aluno = $sql->fetch();
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="assets\dselect.js"></script>
 <script>
-    dselect(document.querySelector('#Pessoa'), {
+    dselect(document.querySelector('#Disciplina'), {
+        search: true
+    });
+    dselect(document.querySelector('#Aluno'), {
         search: true
     });
 </script>
 <script src="./assets/main.js"></script>
 
-</html>s
+</html>

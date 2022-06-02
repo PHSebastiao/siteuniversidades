@@ -33,7 +33,7 @@ if (isset($_POST["nome"]) && isset($_POST["codigo"])) {
 <body>
     <?php require_once 'header.php' ?>
     <main>
-        <div class="container">
+        <div class="container  mt-5">
             <h1>Gerenciador de Cursos</h1>
             <div class="row">
                 <form action="./cursosCriar.php" method="POST">

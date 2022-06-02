@@ -49,7 +49,7 @@ $disciplina = $sql->fetch();
 <body>
     <?php require_once 'header.php' ?>
     <main>
-        <div class="container">
+        <div class="container  mt-5">
             <h1>Editar Disciplina</h1>
             <div class="row">
                 <form action="./disciplinaEdit.php?id=<?= $id ?>" method="POST">
@@ -63,15 +63,15 @@ $disciplina = $sql->fetch();
                     </div>
                     <div class="mb-3 col-6">
                         <label for="precoBase" class="form-label">Preço Base</label>
-                        <input type="text" class="form-control" id="precoBase" name="precoBase" aria-describedby="precoBase" value="<?= $disciplina['PrecoBase'] ?>">
+                        <input type="number" class="form-control" id="precoBase" step="0.01" name="precoBase" aria-describedby="precoBase" value="<?= $disciplina['PrecoBase'] ?>">
                     </div>
                     <div class="mb-3 col-6">
                         <label for="creditos" class="form-label">Créditos</label>
-                        <input type="text" class="form-control" id="creditos" name="creditos" aria-describedby="creditos" value="<?= $disciplina['Creditos'] ?>">
+                        <input type="number" class="form-control" id="creditos" name="creditos" aria-describedby="creditos" value="<?= $disciplina['Creditos'] ?>">
                     </div>
                     <div class="mb-3 col-6">
                         <label for="periodoletivo" class="form-label">Período Letivo</label>
-                        <select class="form-select" id="periodoletivo" name="periodoLetivo" value="<?= $disciplina['IdPeriodo'] ?>>
+                        <select class="form-select" id="periodoletivo" name="periodoLetivo" value="<?= $disciplina['IdPeriodo'] ?>">
                             <?php
                             $sql = $pdo->query("SELECT * FROM  periodoLetivo;");
 
@@ -92,6 +92,11 @@ $disciplina = $sql->fetch();
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="assets\dselect.js"></script>
+<script>
+    dselect(document.querySelector('#periodoLetivo'), {
+        search: true
+    });
+</script>
 <script src="./assets/main.js"></script>
 
 </html>

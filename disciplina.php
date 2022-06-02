@@ -40,32 +40,35 @@ require_once './config.php';
     <?php require_once 'header.php' ?>
     <main>
         <div class="container my-5">
-            <h1>Gerenciador de Disciplinas</h1>
+            <h1>Gerenciador Disciplinas</h1>
             <div class="d-flex justify-content-end">
                 <a class="btn btn-success mb-3" href="./disciplinaCriar.php">Criar Disciplina</a>
             </div>
             <table id="tabela" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
+                        <th scope="col">Id Disciplina</th>
                         <th scope="col">Nome</th>
-                        <th scope="col">Codigo</th>
+                        <th scope="col">Código</th>
                         <th scope="col">Preço</th>
-                        <th scope="col">Crédito</th>
+                        <th scope="col">Créditos</th>
+                        <th scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
 
-                    $sql = $pdo->query("SELECT * FROM Disciplina;");
+                    $sql = $pdo->query("SELECT * FROM disciplina;");
 
 
                     while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                         <tr>
+                            <td><?= $linha['IdDisciplina'] ?></td>
                             <td><?= $linha['Nome'] ?></td>
                             <td><?= $linha['Codigo'] ?></td>
-                            <td><?= $linha['Preço'] ?></td>
-                            <td><?= $linha['Crédito'] ?></td>
+                            <td><?= $linha['PrecoBase'] ?></td>
+                            <td><?= $linha['Creditos'] ?></td>
                             <td>
                                 <a class="btn btn-sm btn-info" href="./disciplinaEdit.php?id=<?= $linha['IdDisciplina'] ?>"><i class="bi bi-pencil"></i></a>
                                 <a class="btn btn-sm btn-danger deleteBtn"><i class="bi bi-trash3"></i></a>

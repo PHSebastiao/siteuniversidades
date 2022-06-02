@@ -8,13 +8,15 @@ if (isset($_GET['id'])) {
     header("Location: ./disciplina.php");
 }
 
-if (isset($_POST["nome"]) && isset($_POST["codigo"]) && isset($_POST["precoBase"]) && isset($_POST["creditos"])) {
+if (isset($_POST["nome"]) && isset($_POST["codigo"]) && isset($_POST["precoBase"]) && isset($_POST["creditos"]) && isset($_POST["periodoLetivo"])) {
     try {
-        $stmt = $pdo->prepare('UPDATE Disciplina SET nome = :nome, codigo = :codigo, precoBase = :precoBase, creditos = :creditos WHERE IdDisciplina = :id');
+        $stmt = $pdo->prepare('UPDATE Disciplina SET nome = :nome, codigo = :codigo, precoBase = :precoBase, creditos = :creditos, fk_idPeriodo = :periodoLetivo WHERE IdDisciplina = :id');
+        $stmt->bindParam(':id', $id);
         $stmt->bindParam(':nome', $_POST["nome"]);
         $stmt->bindParam(':codigo', $_POST["codigo"]);
         $stmt->bindParam(':precoBase', $_POST["precoBase"]);
         $stmt->bindParam(':creditos', $_POST["creditos"]);
+        $stmt->bindParam(':periodoLetivo', $_POST["periodoLetivo"]);
         $stmt->execute();
         header("Location: ./disciplina.php");
     } catch (PDOException $e) {
@@ -53,23 +55,31 @@ $disciplina = $sql->fetch();
                 <form action="./disciplinaEdit.php?id=<?= $id ?>" method="POST">
                     <div class="mb-3 col-6">
                         <label for="Nome" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="Nome" name="nome" aria-describedby="Nome">
+                        <input type="text" class="form-control" id="Nome" name="nome" aria-describedby="Nome"  value="<?= $disciplina['Nome'] ?>">
                     </div>
                     <div class="mb-3 col-6">
                         <label for="Código" class="form-label">Código</label>
-                        <input type="text" class="form-control" id="Código" name="codigo" aria-describedby="Código">
-                    </div>
-                    <div class="mb-3 col-6">
-                        <label for="Código" class="form-label">Código</label>
-                        <input type="text" class="form-control" id="Código" name="codigo" aria-describedby="Código">
+                        <input type="text" class="form-control" id="Código" name="codigo" aria-describedby="Código" value="<?= $disciplina['Codigo'] ?>">
                     </div>
                     <div class="mb-3 col-6">
                         <label for="precoBase" class="form-label">Preço Base</label>
-                        <input type="text" class="form-control" id="precoBase" name="precoBase" aria-describedby="precoBase">
+                        <input type="text" class="form-control" id="precoBase" name="precoBase" aria-describedby="precoBase" value="<?= $disciplina['PrecoBase'] ?>">
                     </div>
                     <div class="mb-3 col-6">
                         <label for="creditos" class="form-label">Créditos</label>
-                        <input type="text" class="form-control" id="creditos" name="creditos" aria-describedby="creditos">
+                        <input type="text" class="form-control" id="creditos" name="creditos" aria-describedby="creditos" value="<?= $disciplina['Creditos'] ?>">
+                    </div>
+                    <div class="mb-3 col-6">
+                        <label for="periodoletivo" class="form-label">Período Letivo</label>
+                        <select class="form-select" id="periodoletivo" name="periodoLetivo" value="<?= $disciplina['IdPeriodo'] ?>>
+                            <?php
+                            $sql = $pdo->query("SELECT * FROM  periodoLetivo;");
+
+                            while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
+                            ?>
+                                <option value="<?= $linha['IdPeriodo'] ?>" <?php if ($linha['IdPeriodo'] == $disciplina['fk_IdPeriodo']) echo 'selected' ?>><?= $linha['Codigo'] ?></option>
+                            <?php } ?>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Criar</button>
                     <button type="button" class="btn btn-secondary voltar">Voltar</button>

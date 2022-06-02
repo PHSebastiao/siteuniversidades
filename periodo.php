@@ -49,6 +49,7 @@ require_once './config.php';
                     <tr>
                         <th scope="col">Id Periodo</th>
                         <th scope="col">Codigo</th>
+                        <th scope="col">Curso</th>
                         <th scope="col">Data de Inicio</th>
                         <th scope="col">Data de Término</th>
                         <th scope="col">Ações</th>
@@ -57,7 +58,7 @@ require_once './config.php';
                 <tbody>
                     <?php
 
-                    $sql = $pdo->query("SELECT * FROM periodoletivo;");
+                    $sql = $pdo->query("select pl.IdPeriodo, pl.Codigo, pl.DataInicio, pl.DataFim, c.Nome as Curso from periodoletivo as pl left join curso as c on pl.fk_idcurso = c.idcurso;");
 
 
                     while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
@@ -65,6 +66,7 @@ require_once './config.php';
                         <tr>
                             <td><?= $linha['IdPeriodo'] ?></td>
                             <td><?= $linha['Codigo'] ?></td>
+                            <td><?= $linha['Curso'] ?></td>
                             <td><?= $linha['DataInicio'] ?></td>
                             <td><?= $linha['DataFim'] ?></td>
                             <td>
@@ -79,8 +81,9 @@ require_once './config.php';
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 <script src="./assets/main.js"></script>
 
 <script>

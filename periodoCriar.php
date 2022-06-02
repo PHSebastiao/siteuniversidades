@@ -1,12 +1,13 @@
 <?php
 require_once './config.php';
 
-if (isset($_POST["codigo"]) && isset($_POST["dataInicio"]) && isset($_POST["dataFim"])) {
+if (isset($_POST["codigo"]) && isset($_POST["dataInicio"]) && isset($_POST["dataFim"]) && isset($_POST["curso"])) {
     try {
-        $stmt = $pdo->prepare('INSERT INTO periodoletivo (codigo, dataInicio, dataFim) VALUES (:codigo, :dataInicio, :dataFim)');
+        $stmt = $pdo->prepare('INSERT INTO periodoletivo (codigo, dataInicio, dataFim, fk_idCurso) VALUES (:codigo, :dataInicio, :dataFim, curso);');
         $stmt->bindParam(':codigo', $_POST["codigo"]);
         $stmt->bindParam(':dataInicio', $_POST["dataInicio"]);
         $stmt->bindParam(':dataFim', $_POST["dataFim"]);
+        $stmt->bindParam(':curso', $_POST["curso"]);
         $stmt->execute();
         header("Location: ./periodo.php");
     } catch (PDOException $e) {
@@ -50,6 +51,18 @@ if (isset($_POST["codigo"]) && isset($_POST["dataInicio"]) && isset($_POST["data
                         <label for="dataFim" class="form-label">Data Final</label>
                         <input type="date" class="form-control" id="dataFim" name="dataFim" aria-describedby="dataInicio">
                     </div>
+                    <div class="mb-3 col-6">
+                        <label for="Curso" class="form-label">Curso</label>
+                        <select class="form-select" id="Curso" name="curso">
+                            <?php
+                            $sql = $pdo->query("SELECT IdCurso, Nome FROM Curso;");
+
+                            while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
+                            ?>
+                                <option value="<?= $linha['IdCurso'] ?>"><?= $linha['Nome'] ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-success">Criar</button>
                     <button type="button" class="btn btn-secondary voltar">Voltar</button>
                 </form>
@@ -61,6 +74,11 @@ if (isset($_POST["codigo"]) && isset($_POST["dataInicio"]) && isset($_POST["data
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="assets\dselect.js"></script>
+<script>
+    dselect(document.querySelector('#Curso'), {
+        search: true
+    });
+</script>
 <script src="./assets/main.js"></script>
 
 </html>

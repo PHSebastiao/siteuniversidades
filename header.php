@@ -1,3 +1,16 @@
+<?php
+function genLinkClasses($linkFile)
+{
+    $currentFile = basename($_SERVER["SCRIPT_FILENAME"], '.php');
+    if ($linkFile == $currentFile) {
+        echo 'class="nav-link active" aria-current="page"';
+    } else {
+        echo 'class="nav-link"';
+    }
+    if ($linkFile != 'index') echo ' href="./' . $linkFile . '.php"';
+}
+?>
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -7,39 +20,38 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav d-flex mb-2 mb-lg-0">
-
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./">Home</a>
+                        <a <?php genLinkClasses('index') ?> href="./">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./universidades.php">Universidades</a>
+                        <a <?php genLinkClasses('universidades')?>>Universidades</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./enderecos.php">Endereços</a>
+                        <a <?php genLinkClasses('enderecos') ?>>Endereços</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./pessoa.php">Pessoa</a>
+                        <a <?php genLinkClasses('pessoa') ?>>Pessoa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./professor.php">Professores</a>
+                        <a <?php genLinkClasses('professor') ?>>Professores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./aluno.php">Aluno</a>
+                        <a <?php genLinkClasses('aluno') ?>>Aluno</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./cursos.php">Cursos</a>
+                        <a <?php genLinkClasses('cursos') ?>>Cursos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./periodo.php">Período</a>
+                        <a <?php genLinkClasses('periodo') ?>>Período</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./disciplina.php">Disciplina</a>
+                        <a <?php genLinkClasses('disciplina') ?>>Disciplina</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./matriculas.php">Matrícula</a>
+                        <a <?php genLinkClasses('matriculas') ?>>Matrícula</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./profcad.php">Cadastro Prof</a>
+                        <a <?php genLinkClasses('profcad') ?>>Cadastro Prof</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Gerência</a>

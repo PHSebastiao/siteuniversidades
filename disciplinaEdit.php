@@ -81,7 +81,7 @@ $disciplina = $sql->fetch();
                             <?php } ?>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Criar</button>
+                    <button type="submit" class="btn btn-primary">Editar</button>
                     <button type="button" class="btn btn-secondary voltar">Voltar</button>
                 </form>
             </div>

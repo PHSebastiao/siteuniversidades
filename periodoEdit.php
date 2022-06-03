@@ -8,13 +8,14 @@ if (isset($_GET['id'])) {
     header("Location: ./periodo.php");
 }
 
-if (isset($_POST["codigo"]) && isset($_POST["dataInicio"]) && isset($_POST["dataFim"])) {
+if (isset($_POST["codigo"]) && isset($_POST["dataInicio"]) && isset($_POST["dataFim"]) && isset($_POST["curso"])) {
     try {
-        $stmt = $pdo->prepare('UPDATE periodoletivo SET codigo = :codigo, dataInicio = :dataInicio, dataFim = :dataFim WHERE IdPeriodo = :id');
+        $stmt = $pdo->prepare('UPDATE periodoletivo SET codigo = :codigo, dataInicio = :dataInicio, dataFim = :dataFim, fk_IdCurso = :curso WHERE IdPeriodo = :id');
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':codigo', $_POST["codigo"]);
         $stmt->bindParam(':dataInicio', $_POST["dataInicio"]);
         $stmt->bindParam(':dataFim', $_POST["dataFim"]);
+        $stmt->bindParam(':curso', $_POST["curso"]);
         $stmt->execute();
         header("Location: ./periodo.php");
     } catch (PDOException $e) {

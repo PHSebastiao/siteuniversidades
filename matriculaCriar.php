@@ -7,7 +7,7 @@ if (isset($_POST["aluno"]) && isset($_POST["disciplina"])) {
         $stmt->bindParam(':disciplina', $_POST["disciplina"]);
         $stmt->bindParam(':aluno', $_POST["aluno"]);
         $stmt->execute();
-        header("Location: ./profcad.php");
+        header("Location: ./matriculas.php");
     } catch (PDOException $e) {
         echo $e->getMessage();
     }

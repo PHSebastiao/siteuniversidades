@@ -5,7 +5,7 @@ $id;
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 } else {
-    header("Location: ./disciplina.php");
+    header("Location: ./matriculas.php");
 }
 
 if (isset($_POST["aluno"]) && isset($_POST["disciplina"])) {

@@ -9,6 +9,12 @@ function genLinkClasses($linkFile)
     }
     if ($linkFile != 'index') echo ' href="./' . $linkFile . '.php"';
 }
+
+session_start();
+if((!isset ($_SESSION['login']) == true) and (!isset ($_SESSION['senha']) == true))
+{
+  header('Location: login.php');
+  }
 ?>
 
 <header>

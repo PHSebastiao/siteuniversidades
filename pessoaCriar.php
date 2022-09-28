@@ -54,7 +54,7 @@ if (isset($_POST["CPF"]) && isset($_POST["PrimeiroNome"]) && isset($_POST["Sobre
                         <label for="DTN" class="form-label">Data de Nascimento</label>
                         <input type="date" class="form-control" id="DTN" name="DTN" aria-describedby="DTN">
                     </div>
-                    <button type="submit" class="btn btn-success">Criar</button>"yyyy-mm-dd"
+                    <button type="submit" class="btn btn-success">Criar</button>
                     <button type="button" class="btn btn-secondary voltar">Voltar</button>
                 </form>
             </div>

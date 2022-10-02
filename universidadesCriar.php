@@ -1,6 +1,6 @@
 <?php
 require_once './config.php';
-require_once './actions/universidades.php';
+// require_once './actions/universidades.php';
 
 if (isset($_POST["nome"]) && isset($_POST["codigo"]) && isset($_POST["sigla"]) && isset($_POST["endereco"])) {
     try {

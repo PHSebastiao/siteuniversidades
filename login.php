@@ -84,13 +84,18 @@
             $stmt->bindParam(':email', $_POST["email"]);
             $stmt->bindParam(':pwd', $passwd);
             $stmt->execute();
-            $login = $stmt->fetch(PDO::FETCH_ASSOC);
-            if ($login) {
-                header("Location: ./index.php");
-                $_SESSION['login'] = $email;
-                $_SESSION['senha'] = $passwd;
+
+            if ($stmt->rowCount() == 1) {
+                if ($row = $stmt->fetch()) {
+                    session_start();
+                    $_SESSION['login'] = $row['login'];
+                    $_SESSION['senha'] = $row['passwd'];
+                    $_SESSION['nome'] = $row['nome'];
+                    header("Location: ./index.php");
+                }
             } else {
-                echo '<script>$(document).ready(function() { toastr.warning("Acesso não autorizado.") });</script>';
+                // echo '<script>$(document).ready(function() {  });</script>';
+                print_r('<script>window.onload = function(){ toastr.error("Acesso não autorizado.") }</script>');
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
@@ -117,8 +122,9 @@
                     <input type="checkbox" value="remember-me"> Lembrar de mim
                 </label>
             </div>
+            <div class="mb-2"><a href="cadastro.php">Cadastre-se</a></div>
             <button class="w-100 btn btn-lg btn-primary" type="submit">Logar</button>
-            <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
+            <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
         </form>
     </main>
 

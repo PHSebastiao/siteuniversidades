@@ -11,13 +11,64 @@ function genLinkClasses($linkFile)
 }
 
 session_start();
-if((!isset ($_SESSION['login']) == true) and (!isset ($_SESSION['senha']) == true))
-{
-  header('Location: login.php');
-  }
+if ((!isset($_SESSION['login']) == true) && (!isset($_SESSION['senha']) == true)) {
+    header('Location: login.php');
+}
 ?>
 
 <header>
+<!-- <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+      <span class="fs-4">Sidebar</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a href="#" class="nav-link active" aria-current="page">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+          Home
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+          Dashboard
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+          Orders
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
+          Products
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+          Customers
+        </a>
+      </li>
+    </ul>
+    <hr>
+    <div class="dropdown">
+      <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+        <strong>mdo</strong>
+      </a>
+      <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+        <li><a class="dropdown-item" href="#">New project...</a></li>
+        <li><a class="dropdown-item" href="#">Settings</a></li>
+        <li><a class="dropdown-item" href="#">Profile</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#">Sign out</a></li>
+      </ul>
+    </div>
+  </div> -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="./">Site Universidades</a>
@@ -30,7 +81,7 @@ if((!isset ($_SESSION['login']) == true) and (!isset ($_SESSION['senha']) == tru
                         <a <?php genLinkClasses('index') ?> href="./">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a <?php genLinkClasses('universidades')?>>Universidades</a>
+                        <a <?php genLinkClasses('universidades') ?>>Universidades</a>
                     </li>
                     <li class="nav-item">
                         <a <?php genLinkClasses('enderecos') ?>>Endereços</a>
@@ -59,8 +110,12 @@ if((!isset ($_SESSION['login']) == true) and (!isset ($_SESSION['senha']) == tru
                     <li class="nav-item">
                         <a <?php genLinkClasses('profcad') ?>>Cadastro Prof</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="#">Gerência</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <?php echo '<a class="nav-link" href="logout.php?token='.md5(session_id()).'">Sair</a>'; ?>
+                        <!-- <a class="nav-link" href="logout.php?token='<?md5(session_id())?>'">Sair</a> -->
                     </li>
                 </ul>
             </div>
